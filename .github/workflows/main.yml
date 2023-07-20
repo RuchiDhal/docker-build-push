@@ -1,0 +1,16 @@
+name: docker-build-push
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  Containerise-and-push-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: docker build and push
+        run: | 
+          export DOCKER_USERNAME=${secret.DOCKER_USERNAME}
+          export DOCKER_PASSWORD=${secret.DOCKER_PASSWORD}
+          bash run.sh
